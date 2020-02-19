@@ -12,8 +12,8 @@ export class Main extends React.Component{
     }
     render(){
         console.log("this.props.store", this.props.store)
-        const content = this.props.store.links && this.props.store.links.map(link => {
-            return <Link link={link}/>
+        const content = this.props.store.linkConnection && this.props.store.linkConnection.edges.map(edge => {
+            return <Link link={edge.node}/>
         })
         return(
             <div>
@@ -31,9 +31,13 @@ export class Main extends React.Component{
 export default createFragmentContainer(Main, {
     store: graphql`
     fragment Main_store on Store{
-        links{
-            _id,
-            ...Link_link
+        linkConnection(first: 1){
+            edges{
+                node{
+                    id,
+                    ...Link_link
+                }
+            }
         }
     }
     `

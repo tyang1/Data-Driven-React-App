@@ -7,7 +7,7 @@ class Link extends React.Component{
     }
     render(){
       const {link} = this.props;
-            return (<li id={link._id}>
+            return (<li id={link.id}>
                 <a href={link.url}>{link.title}</a>
             </li>)
     }
@@ -15,7 +15,7 @@ class Link extends React.Component{
 
 export default createFragmentContainer(Link, {
     link: graphql`
-    fragment Link_link on LinkType{
+    fragment Link_link on Link{
             url,
             title,
     }

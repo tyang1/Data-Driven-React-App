@@ -13,10 +13,14 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type Main_store$ref: FragmentReference;
 declare export opaque type Main_store$fragmentType: Main_store$ref;
 export type Main_store = {|
-  +links: ?$ReadOnlyArray<?{|
-    +_id: ?string,
-    +$fragmentRefs: Link_link$ref,
-  |}>,
+  +linkConnection: ?{|
+    +edges: ?$ReadOnlyArray<?{|
+      +node: ?{|
+        +id: string,
+        +$fragmentRefs: Link_link$ref,
+      |}
+    |}>
+  |},
   +$refType: Main_store$ref,
 |};
 export type Main_store$data = Main_store;
@@ -38,29 +42,57 @@ const node/*: ReaderFragment*/ = {
     {
       "kind": "LinkedField",
       "alias": null,
-      "name": "links",
-      "storageKey": null,
-      "args": null,
-      "concreteType": "LinkType",
-      "plural": true,
+      "name": "linkConnection",
+      "storageKey": "linkConnection(first:1)",
+      "args": [
+        {
+          "kind": "Literal",
+          "name": "first",
+          "value": 1
+        }
+      ],
+      "concreteType": "LinkConnection",
+      "plural": false,
       "selections": [
         {
-          "kind": "ScalarField",
+          "kind": "LinkedField",
           "alias": null,
-          "name": "_id",
+          "name": "edges",
+          "storageKey": null,
           "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "FragmentSpread",
-          "name": "Link_link",
-          "args": null
+          "concreteType": "LinkEdge",
+          "plural": true,
+          "selections": [
+            {
+              "kind": "LinkedField",
+              "alias": null,
+              "name": "node",
+              "storageKey": null,
+              "args": null,
+              "concreteType": "Link",
+              "plural": false,
+              "selections": [
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "name": "id",
+                  "args": null,
+                  "storageKey": null
+                },
+                {
+                  "kind": "FragmentSpread",
+                  "name": "Link_link",
+                  "args": null
+                }
+              ]
+            }
+          ]
         }
       ]
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '6d3477137a8fc8689647ed1e64aeac09';
+(node/*: any*/).hash = '9cb77f4972b605bfdb31b307d5e2e9a2';
 
 module.exports = node;

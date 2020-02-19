@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash eb121173b811f6d7972bdf5a1f625a38
+ * @relayHash 56f8067290bb70c1bed80e34eec5c4a9
  */
 
 /* eslint-disable */
@@ -30,15 +30,19 @@ query appQuery {
   }
 }
 
-fragment Link_link on LinkType {
+fragment Link_link on Link {
   url
   title
 }
 
 fragment Main_store on Store {
-  links {
-    _id
-    ...Link_link
+  linkConnection(first: 1) {
+    edges {
+      node {
+        id
+        ...Link_link
+      }
+    }
   }
 }
 */
@@ -87,32 +91,60 @@ const node/*: ConcreteRequest*/ = {
           {
             "kind": "LinkedField",
             "alias": null,
-            "name": "links",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "LinkType",
-            "plural": true,
+            "name": "linkConnection",
+            "storageKey": "linkConnection(first:1)",
+            "args": [
+              {
+                "kind": "Literal",
+                "name": "first",
+                "value": 1
+              }
+            ],
+            "concreteType": "LinkConnection",
+            "plural": false,
             "selections": [
               {
-                "kind": "ScalarField",
+                "kind": "LinkedField",
                 "alias": null,
-                "name": "_id",
+                "name": "edges",
+                "storageKey": null,
                 "args": null,
-                "storageKey": null
-              },
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "url",
-                "args": null,
-                "storageKey": null
-              },
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "title",
-                "args": null,
-                "storageKey": null
+                "concreteType": "LinkEdge",
+                "plural": true,
+                "selections": [
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "name": "node",
+                    "storageKey": null,
+                    "args": null,
+                    "concreteType": "Link",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "id",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "url",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "title",
+                        "args": null,
+                        "storageKey": null
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -124,7 +156,7 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "appQuery",
     "id": null,
-    "text": "query appQuery {\n  store {\n    ...Main_store\n  }\n}\n\nfragment Link_link on LinkType {\n  url\n  title\n}\n\nfragment Main_store on Store {\n  links {\n    _id\n    ...Link_link\n  }\n}\n",
+    "text": "query appQuery {\n  store {\n    ...Main_store\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n}\n\nfragment Main_store on Store {\n  linkConnection(first: 1) {\n    edges {\n      node {\n        id\n        ...Link_link\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

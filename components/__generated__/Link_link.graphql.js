@@ -28,7 +28,7 @@ export type Link_link$key = {
 const node/*: ReaderFragment*/ = {
   "kind": "Fragment",
   "name": "Link_link",
-  "type": "LinkType",
+  "type": "Link",
   "metadata": null,
   "argumentDefinitions": [],
   "selections": [
@@ -49,6 +49,6 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'b52c685f97afdbecae329a2fc31f172f';
+(node/*: any*/).hash = 'dae1e3919d9aed9f0821aab8cf122831';
 
 module.exports = node;
