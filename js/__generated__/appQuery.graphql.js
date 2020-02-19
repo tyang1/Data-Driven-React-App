@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash eb8b5461a615c1e019ed4fefd298112d
+ * @relayHash eb121173b811f6d7972bdf5a1f625a38
  */
 
 /* eslint-disable */
@@ -30,11 +30,15 @@ query appQuery {
   }
 }
 
+fragment Link_link on LinkType {
+  url
+  title
+}
+
 fragment Main_store on Store {
   links {
-    url
-    title
     _id
+    ...Link_link
   }
 }
 */
@@ -92,6 +96,13 @@ const node/*: ConcreteRequest*/ = {
               {
                 "kind": "ScalarField",
                 "alias": null,
+                "name": "_id",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
                 "name": "url",
                 "args": null,
                 "storageKey": null
@@ -100,13 +111,6 @@ const node/*: ConcreteRequest*/ = {
                 "kind": "ScalarField",
                 "alias": null,
                 "name": "title",
-                "args": null,
-                "storageKey": null
-              },
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "_id",
                 "args": null,
                 "storageKey": null
               }
@@ -120,7 +124,7 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "appQuery",
     "id": null,
-    "text": "query appQuery {\n  store {\n    ...Main_store\n  }\n}\n\nfragment Main_store on Store {\n  links {\n    url\n    title\n    _id\n  }\n}\n",
+    "text": "query appQuery {\n  store {\n    ...Main_store\n  }\n}\n\nfragment Link_link on LinkType {\n  url\n  title\n}\n\nfragment Main_store on Store {\n  links {\n    _id\n    ...Link_link\n  }\n}\n",
     "metadata": {}
   }
 };

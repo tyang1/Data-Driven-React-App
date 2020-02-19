@@ -8,14 +8,14 @@
 
 /*::
 import type { ReaderFragment } from 'relay-runtime';
+type Link_link$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type Main_store$ref: FragmentReference;
 declare export opaque type Main_store$fragmentType: Main_store$ref;
 export type Main_store = {|
   +links: ?$ReadOnlyArray<?{|
-    +url: ?string,
-    +title: ?string,
     +_id: ?string,
+    +$fragmentRefs: Link_link$ref,
   |}>,
   +$refType: Main_store$ref,
 |};
@@ -47,29 +47,20 @@ const node/*: ReaderFragment*/ = {
         {
           "kind": "ScalarField",
           "alias": null,
-          "name": "url",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
-          "name": "title",
-          "args": null,
-          "storageKey": null
-        },
-        {
-          "kind": "ScalarField",
-          "alias": null,
           "name": "_id",
           "args": null,
           "storageKey": null
+        },
+        {
+          "kind": "FragmentSpread",
+          "name": "Link_link",
+          "args": null
         }
       ]
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'd59ee1c6adfe93ad429e1d1f82b018be';
+(node/*: any*/).hash = '6d3477137a8fc8689647ed1e64aeac09';
 
 module.exports = node;
