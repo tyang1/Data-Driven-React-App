@@ -20,7 +20,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     presets: ['@babel/preset-env', "@babel/preset-react", "@babel/preset-typescript"],
-                    plugins: [getBabelRelayPlugin(parsedSchemaJSON.__schema)],
+                    plugins: [getBabelRelayPlugin(parsedSchemaJSON.__schema), "@babel/plugin-proposal-class-properties"],
                 }
             } 
         }, 
