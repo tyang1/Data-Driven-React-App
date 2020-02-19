@@ -1,28 +1,40 @@
 import {GraphQLSchema, 
     GraphQLObjectType, 
     GraphQLString, 
+    GraphQLNonNull,
+    GraphQLID,
     GraphQLList } from 'graphql';
+
+import {connectionDefinitions, connectionArgs, connectionFromPromisedArray } from 'graphql-relay';
 
 let Schema = (db) => {
 
 let store = {};
 console.log("5. inside graphQL schema")
 let linkType = new GraphQLObjectType({
-    name: "LinkType",
-    fields: () => ({
-        _id : { type: GraphQLString},
+    name: "Link",
+    fields: {
+        id: { type: new GraphQLNonNull(GraphQLID), resolve: (link) => {
+            return link._id
+        }},
         title: {type: GraphQLString},
         url: { type: GraphQLString},
-    })
+    }
+    
 })
-
+let {connectionType: linkConnection} = connectionDefinitions({
+    name: 'Link',
+    nodeType : linkType
+})
 let storeType = new GraphQLObjectType({
         name: 'Store', 
         fields: {
-            links: {
-                type: new GraphQLList(linkType),
-                resolve: () => 
-                    db.collection("links").find({}).toArray()
+            linkConnection: {
+                type: linkConnection,
+                args: connectionArgs,
+                resolve: (__, args) => connectionFromPromisedArray(
+                    db.collection("links").find({}).toArray(),
+                    args)
                 ,
             }
         }
