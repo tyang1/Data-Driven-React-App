@@ -37,18 +37,25 @@ const node/*: ReaderFragment*/ = {
   "name": "Main_store",
   "type": "Store",
   "metadata": null,
-  "argumentDefinitions": [],
+  "argumentDefinitions": [
+    {
+      "kind": "LocalArgument",
+      "name": "limit",
+      "type": "Int",
+      "defaultValue": 1
+    }
+  ],
   "selections": [
     {
       "kind": "LinkedField",
       "alias": null,
       "name": "linkConnection",
-      "storageKey": "linkConnection(first:1)",
+      "storageKey": null,
       "args": [
         {
-          "kind": "Literal",
+          "kind": "Variable",
           "name": "first",
-          "value": 1
+          "variableName": "limit"
         }
       ],
       "concreteType": "LinkConnection",
@@ -93,6 +100,6 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '9cb77f4972b605bfdb31b307d5e2e9a2';
+(node/*: any*/).hash = '31ff590fb0304de78495a7b00e861176';
 
 module.exports = node;

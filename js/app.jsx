@@ -34,7 +34,6 @@ export const environment = new Environment({
 
 
 const renderQuery = ({error, props}) => {
-  console.log("props", props)
     if (error) {
       return <div>Error!</div>;
     }
