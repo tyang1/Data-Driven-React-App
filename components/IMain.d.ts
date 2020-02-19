@@ -1,6 +1,7 @@
 declare namespace IMain {
     export type IProps  = {
-        limit: number
+        limit: number,
+        state: IState
     }
     
     export type IState = {

@@ -4,6 +4,8 @@ import {GraphQLSchema,
     GraphQLList } from 'graphql';
 
 let Schema = (db) => {
+
+let store = {};
 console.log("5. inside graphQL schema")
 let linkType = new GraphQLObjectType({
     name: "LinkType",
@@ -14,15 +16,26 @@ let linkType = new GraphQLObjectType({
     })
 })
 
-let schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-        name: 'Query',
+let storeType = new GraphQLObjectType({
+        name: 'Store', 
         fields: {
             links: {
                 type: new GraphQLList(linkType),
                 resolve: () => 
                     db.collection("links").find({}).toArray()
                 ,
+            }
+        }
+
+})
+
+let schema = new GraphQLSchema({
+    query: new GraphQLObjectType({
+        name: 'Query', 
+        fields: {
+            store: {
+                type: storeType,
+                resolve : () => store
             }
         }
     })

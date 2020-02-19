@@ -14,13 +14,13 @@ module.exports = {
     module:{
         rules:[
             {
-            test: /\.(ts|tsx|js|jsx)$/,
+            test: /\.(js|jsx)$/,
             exclude: /node_modules/,
             use: {
                 loader: 'babel-loader',
                 options: {
-                  presets: ['@babel/preset-env', "@babel/preset-react", "@babel/preset-typescript"],
-                  plugins: [getBabelRelayPlugin(parsedSchemaJSON.__schema)],
+                    presets: ['@babel/preset-env', "@babel/preset-react", "@babel/preset-typescript"],
+                    plugins: [getBabelRelayPlugin(parsedSchemaJSON.__schema)],
                 }
             } 
         }, 
@@ -28,6 +28,13 @@ module.exports = {
             test: /\.(ts|tsx)$/,
             exclude: /node_modules/,
             use: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', "@babel/preset-react", "@babel/preset-typescript"],
+                        plugins: [getBabelRelayPlugin(parsedSchemaJSON.__schema)],
+                    }
+                } ,
                 {
                     loader: "ts-loader",
                 },
