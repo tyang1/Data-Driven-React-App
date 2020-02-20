@@ -5,7 +5,7 @@ import {GraphQLSchema,
     GraphQLID,
     GraphQLList } from 'graphql';
 
-import {connectionDefinitions, connectionArgs, connectionFromPromisedArray } from 'graphql-relay';
+import {connectionDefinitions, connectionArgs, connectionFromPromisedArray, mutationWithClientMutationId } from 'graphql-relay';
 
 let Schema = (db) => {
 
@@ -39,6 +39,25 @@ let storeType = new GraphQLObjectType({
             }
         }
 
+});
+
+let createLinkMutation = mutationWithClientMutationId({
+    name: 'CreateLink',
+    inputFields:{
+        title: {type: new GraphQLNonNull(GraphQLString)},
+        url: {type: new GraphQLNonNull(GraphQLString)}
+    },
+    outputFields:{ //** Read after the mutation */
+        link:{
+            type: linkType,
+            resolve: (mongodbResult) => mongodbResult.ops[0]
+        }
+    },
+    mutateAndGetPayload: ({title, url}) => {
+        //mongodb operation
+        return db.collection("links").insertOne({title, url})
+
+    }
 })
 
 let schema = new GraphQLSchema({
@@ -49,6 +68,12 @@ let schema = new GraphQLSchema({
                 type: storeType,
                 resolve : () => store
             }
+        }
+    }),
+    mutation: new GraphQLObjectType({
+        name: 'mutation',
+        fields: {
+                createLinks: createLinkMutation
         }
     })
 
