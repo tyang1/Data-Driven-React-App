@@ -37,10 +37,18 @@ let storeType = new GraphQLObjectType({
             id: globalIdField("Store"),
             linkConnection: {
                 type: linkConnection,
-                args: connectionArgs,
-                resolve: (__, args) => connectionFromPromisedArray(
-                    db.collection("links").find({}).sort({createdAt: -1}).toArray(),
+                args: {... connectionArgs,
+                    query: {type: GraphQLString }
+                },
+                resolve: (__, args) => {
+                    let findParams = {};
+                    if(args.query){
+                        findParams.title = new RegExp(args.query, "i")
+                    }
+                    return connectionFromPromisedArray(
+                    db.collection("links").find(findParams).sort({createdAt: -1}).toArray(),
                     args)
+                }
                 ,
             }
         }
