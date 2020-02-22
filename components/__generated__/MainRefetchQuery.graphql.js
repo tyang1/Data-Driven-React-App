@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash eadd641b0e4066910ecabda68d88249d
+ * @relayHash 13b1e7aef6922ad43f5f3940b9edcc24
  */
 
 /* eslint-disable */
@@ -11,7 +11,8 @@
 import type { ConcreteRequest } from 'relay-runtime';
 type Main_store$ref = any;
 export type MainRefetchQueryVariables = {|
-  limit?: ?number
+  limit?: ?number,
+  query?: ?string,
 |};
 export type MainRefetchQueryResponse = {|
   +store: ?{|
@@ -28,9 +29,10 @@ export type MainRefetchQuery = {|
 /*
 query MainRefetchQuery(
   $limit: Int
+  $query: String
 ) {
   store {
-    ...Main_store_1UvIyz
+    ...Main_store_3HzzW
     id
   }
 }
@@ -41,9 +43,9 @@ fragment Link_link on Link {
   createdAt
 }
 
-fragment Main_store_1UvIyz on Store {
+fragment Main_store_3HzzW on Store {
   id
-  linkConnection(first: $limit) {
+  linkConnection(first: $limit, query: $query) {
     edges {
       node {
         id
@@ -67,21 +69,33 @@ var v0 = [
     "name": "limit",
     "type": "Int",
     "defaultValue": null
+  },
+  {
+    "kind": "LocalArgument",
+    "name": "query",
+    "type": "String",
+    "defaultValue": null
   }
 ],
 v1 = {
+  "kind": "Variable",
+  "name": "query",
+  "variableName": "query"
+},
+v2 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v2 = [
+v3 = [
   {
     "kind": "Variable",
     "name": "first",
     "variableName": "limit"
-  }
+  },
+  (v1/*: any*/)
 ];
 return {
   "kind": "Request",
@@ -109,7 +123,8 @@ return {
                 "kind": "Variable",
                 "name": "limit",
                 "variableName": "limit"
-              }
+              },
+              (v1/*: any*/)
             ]
           }
         ]
@@ -130,13 +145,13 @@ return {
         "concreteType": "Store",
         "plural": false,
         "selections": [
-          (v1/*: any*/),
+          (v2/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
             "name": "linkConnection",
             "storageKey": null,
-            "args": (v2/*: any*/),
+            "args": (v3/*: any*/),
             "concreteType": "LinkConnection",
             "plural": false,
             "selections": [
@@ -158,7 +173,7 @@ return {
                     "concreteType": "Link",
                     "plural": false,
                     "selections": [
-                      (v1/*: any*/),
+                      (v2/*: any*/),
                       {
                         "kind": "ScalarField",
                         "alias": null,
@@ -229,10 +244,12 @@ return {
             "kind": "LinkedHandle",
             "alias": null,
             "name": "linkConnection",
-            "args": (v2/*: any*/),
+            "args": (v3/*: any*/),
             "handle": "connection",
             "key": "Main_linkConnection",
-            "filters": null
+            "filters": [
+              "query"
+            ]
           }
         ]
       }
@@ -242,12 +259,12 @@ return {
     "operationKind": "query",
     "name": "MainRefetchQuery",
     "id": null,
-    "text": "query MainRefetchQuery(\n  $limit: Int\n) {\n  store {\n    ...Main_store_1UvIyz\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store_1UvIyz on Store {\n  id\n  linkConnection(first: $limit) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query MainRefetchQuery(\n  $limit: Int\n  $query: String\n) {\n  store {\n    ...Main_store_3HzzW\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store_3HzzW on Store {\n  id\n  linkConnection(first: $limit, query: $query) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '58fcff57e22bcfb7e3f9f8fdb3ed70af';
+(node/*: any*/).hash = 'b6778d8edfe27d07297a2fd705200cbf';
 
 module.exports = node;

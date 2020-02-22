@@ -63,6 +63,12 @@ return {
       "name": "limit",
       "type": "Int",
       "defaultValue": 10
+    },
+    {
+      "kind": "LocalArgument",
+      "name": "query",
+      "type": "String",
+      "defaultValue": ""
     }
   ],
   "selections": [
@@ -72,7 +78,13 @@ return {
       "alias": "linkConnection",
       "name": "__Main_linkConnection_connection",
       "storageKey": null,
-      "args": null,
+      "args": [
+        {
+          "kind": "Variable",
+          "name": "query",
+          "variableName": "query"
+        }
+      ],
       "concreteType": "LinkConnection",
       "plural": false,
       "selections": [
@@ -149,6 +161,6 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '6cea489dbc2fb936c81eb822e100b327';
+(node/*: any*/).hash = 'a0b00f1ed5fa87eb374559404d01f4cf';
 
 module.exports = node;

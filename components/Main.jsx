@@ -11,7 +11,10 @@ export class Main extends React.Component{
         let newLimit = Number(e.target.value);
         this.props.relay.refetch({limit: newLimit})
     }
-
+    searchHandler = (e) => {
+        let query = e.target.value;
+        this.props.relay.refetch({query})
+    }
     handleNewLink = (e) => {
         e.preventDefault();
         createLinkMutation(this.props.relay.environment, this.props.store.id, {title: this.refs.newTitle.value, url: this.refs.newUrl.value, store:this.props.store})
@@ -21,7 +24,6 @@ export class Main extends React.Component{
     }
     render(){
         const content = this.props.store.linkConnection && this.props.store.linkConnection.edges.map(edge => {
-            console.log('edge', edge)
             return <Link link={edge.node}/>
         })
         return(
@@ -34,6 +36,7 @@ export class Main extends React.Component{
                     <input type="text" placeholder="Url" ref="newUrl"/> 
                     <button type="submit">Add</button>
                 </form>
+                <input type="text" placeholder='Search' onChange={this.searchHandler}/>
 
                 <select onChange={this.setLimit}>
                     <option value='1'>1</option>
@@ -52,10 +55,11 @@ export class Main extends React.Component{
 export default createRefetchContainer(Main, {
     store: graphql`
     fragment Main_store on Store @argumentDefinitions(
-        limit: {type: "Int", defaultValue: 10}
+        limit: {type: "Int", defaultValue: 10},
+        query: {type: "String", defaultValue: ""}
         ){
         id,
-        linkConnection(first: $limit)@connection(key:"Main_linkConnection"){
+        linkConnection(first: $limit, query: $query)@connection(key:"Main_linkConnection"){
             edges{
                 node{
                     id,
@@ -65,9 +69,9 @@ export default createRefetchContainer(Main, {
         }
       }`
     },
-    graphql`query MainRefetchQuery($limit: Int){
+    graphql`query MainRefetchQuery($limit: Int, $query: String){
         store {
-            ...Main_store @arguments(limit: $limit)
+            ...Main_store @arguments(limit: $limit, query: $query)
         }
     }`
 )

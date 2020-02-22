@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0d2448fc959c2648436d497b5fcddf45
+ * @relayHash 949e6abeb7c893a32846453d0a6f988f
  */
 
 /* eslint-disable */
@@ -39,7 +39,7 @@ fragment Link_link on Link {
 
 fragment Main_store on Store {
   id
-  linkConnection(first: 10) {
+  linkConnection(first: 10, query: "") {
     edges {
       node {
         id
@@ -69,6 +69,11 @@ v1 = [
     "kind": "Literal",
     "name": "first",
     "value": 10
+  },
+  {
+    "kind": "Literal",
+    "name": "query",
+    "value": ""
   }
 ];
 return {
@@ -117,7 +122,7 @@ return {
             "kind": "LinkedField",
             "alias": null,
             "name": "linkConnection",
-            "storageKey": "linkConnection(first:10)",
+            "storageKey": "linkConnection(first:10,query:\"\")",
             "args": (v1/*: any*/),
             "concreteType": "LinkConnection",
             "plural": false,
@@ -214,7 +219,9 @@ return {
             "args": (v1/*: any*/),
             "handle": "connection",
             "key": "Main_linkConnection",
-            "filters": null
+            "filters": [
+              "query"
+            ]
           }
         ]
       }
@@ -224,7 +231,7 @@ return {
     "operationKind": "query",
     "name": "appQuery",
     "id": null,
-    "text": "query appQuery {\n  store {\n    ...Main_store\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store on Store {\n  id\n  linkConnection(first: 10) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query appQuery {\n  store {\n    ...Main_store\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store on Store {\n  id\n  linkConnection(first: 10, query: \"\") {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
