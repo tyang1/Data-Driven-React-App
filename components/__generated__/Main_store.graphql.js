@@ -13,6 +13,7 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type Main_store$ref: FragmentReference;
 declare export opaque type Main_store$fragmentType: Main_store$ref;
 export type Main_store = {|
+  +id: string,
   +linkConnection: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +node: ?{|
@@ -32,32 +33,46 @@ export type Main_store$key = {
 */
 
 
-const node/*: ReaderFragment*/ = {
+const node/*: ReaderFragment*/ = (function(){
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
+return {
   "kind": "Fragment",
   "name": "Main_store",
   "type": "Store",
-  "metadata": null,
+  "metadata": {
+    "connection": [
+      {
+        "count": "limit",
+        "cursor": null,
+        "direction": "forward",
+        "path": [
+          "linkConnection"
+        ]
+      }
+    ]
+  },
   "argumentDefinitions": [
     {
       "kind": "LocalArgument",
       "name": "limit",
       "type": "Int",
-      "defaultValue": 1
+      "defaultValue": 10
     }
   ],
   "selections": [
+    (v0/*: any*/),
     {
       "kind": "LinkedField",
-      "alias": null,
-      "name": "linkConnection",
+      "alias": "linkConnection",
+      "name": "__Main_linkConnection_connection",
       "storageKey": null,
-      "args": [
-        {
-          "kind": "Variable",
-          "name": "first",
-          "variableName": "limit"
-        }
-      ],
+      "args": null,
       "concreteType": "LinkConnection",
       "plural": false,
       "selections": [
@@ -79,10 +94,11 @@ const node/*: ReaderFragment*/ = {
               "concreteType": "Link",
               "plural": false,
               "selections": [
+                (v0/*: any*/),
                 {
                   "kind": "ScalarField",
                   "alias": null,
-                  "name": "id",
+                  "name": "__typename",
                   "args": null,
                   "storageKey": null
                 },
@@ -92,6 +108,38 @@ const node/*: ReaderFragment*/ = {
                   "args": null
                 }
               ]
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "cursor",
+              "args": null,
+              "storageKey": null
+            }
+          ]
+        },
+        {
+          "kind": "LinkedField",
+          "alias": null,
+          "name": "pageInfo",
+          "storageKey": null,
+          "args": null,
+          "concreteType": "PageInfo",
+          "plural": false,
+          "selections": [
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "endCursor",
+              "args": null,
+              "storageKey": null
+            },
+            {
+              "kind": "ScalarField",
+              "alias": null,
+              "name": "hasNextPage",
+              "args": null,
+              "storageKey": null
             }
           ]
         }
@@ -99,7 +147,8 @@ const node/*: ReaderFragment*/ = {
     }
   ]
 };
+})();
 // prettier-ignore
-(node/*: any*/).hash = '31ff590fb0304de78495a7b00e861176';
+(node/*: any*/).hash = '6cea489dbc2fb936c81eb822e100b327';
 
 module.exports = node;

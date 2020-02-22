@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 818838b3c93d48f46a86c13bf30b2a32
+ * @relayHash eadd641b0e4066910ecabda68d88249d
  */
 
 /* eslint-disable */
@@ -31,21 +31,30 @@ query MainRefetchQuery(
 ) {
   store {
     ...Main_store_1UvIyz
+    id
   }
 }
 
 fragment Link_link on Link {
   url
   title
+  createdAt
 }
 
 fragment Main_store_1UvIyz on Store {
+  id
   linkConnection(first: $limit) {
     edges {
       node {
         id
         ...Link_link
+        __typename
       }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
   }
 }
@@ -58,6 +67,20 @@ var v0 = [
     "name": "limit",
     "type": "Int",
     "defaultValue": null
+  }
+],
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v2 = [
+  {
+    "kind": "Variable",
+    "name": "first",
+    "variableName": "limit"
   }
 ];
 return {
@@ -107,18 +130,13 @@ return {
         "concreteType": "Store",
         "plural": false,
         "selections": [
+          (v1/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
             "name": "linkConnection",
             "storageKey": null,
-            "args": [
-              {
-                "kind": "Variable",
-                "name": "first",
-                "variableName": "limit"
-              }
-            ],
+            "args": (v2/*: any*/),
             "concreteType": "LinkConnection",
             "plural": false,
             "selections": [
@@ -140,13 +158,7 @@ return {
                     "concreteType": "Link",
                     "plural": false,
                     "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "name": "id",
-                        "args": null,
-                        "storageKey": null
-                      },
+                      (v1/*: any*/),
                       {
                         "kind": "ScalarField",
                         "alias": null,
@@ -160,12 +172,67 @@ return {
                         "name": "title",
                         "args": null,
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "createdAt",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "__typename",
+                        "args": null,
+                        "storageKey": null
                       }
                     ]
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "cursor",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "pageInfo",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "endCursor",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "hasNextPage",
+                    "args": null,
+                    "storageKey": null
                   }
                 ]
               }
             ]
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": null,
+            "name": "linkConnection",
+            "args": (v2/*: any*/),
+            "handle": "connection",
+            "key": "Main_linkConnection",
+            "filters": null
           }
         ]
       }
@@ -175,7 +242,7 @@ return {
     "operationKind": "query",
     "name": "MainRefetchQuery",
     "id": null,
-    "text": "query MainRefetchQuery(\n  $limit: Int\n) {\n  store {\n    ...Main_store_1UvIyz\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n}\n\nfragment Main_store_1UvIyz on Store {\n  linkConnection(first: $limit) {\n    edges {\n      node {\n        id\n        ...Link_link\n      }\n    }\n  }\n}\n",
+    "text": "query MainRefetchQuery(\n  $limit: Int\n) {\n  store {\n    ...Main_store_1UvIyz\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store_1UvIyz on Store {\n  id\n  linkConnection(first: $limit) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

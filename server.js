@@ -37,10 +37,6 @@ app.use(express.static('public'));
     if(err) throw err;
     console.log("schema JSON output completed!")
   })
-  
-  // app.get("/schema", (req, res) => {
-  //   res.json(schemaJSON)
-  // })
   }catch(err){
     console.log(err)
   }

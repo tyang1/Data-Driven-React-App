@@ -14,6 +14,7 @@ declare export opaque type Link_link$fragmentType: Link_link$ref;
 export type Link_link = {|
   +url: ?string,
   +title: ?string,
+  +createdAt: ?string,
   +$refType: Link_link$ref,
 |};
 export type Link_link$data = Link_link;
@@ -45,10 +46,17 @@ const node/*: ReaderFragment*/ = {
       "name": "title",
       "args": null,
       "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "createdAt",
+      "args": null,
+      "storageKey": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'dae1e3919d9aed9f0821aab8cf122831';
+(node/*: any*/).hash = '864a8f8db4423a1f02ce1503b153c2d7';
 
 module.exports = node;

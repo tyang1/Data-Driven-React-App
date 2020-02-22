@@ -5,7 +5,7 @@ import {GraphQLSchema,
     GraphQLID,
     GraphQLList } from 'graphql';
 
-import {connectionDefinitions, connectionArgs, connectionFromPromisedArray, mutationWithClientMutationId } from 'graphql-relay';
+import {connectionDefinitions, connectionArgs, connectionFromPromisedArray, mutationWithClientMutationId, globalIdField } from 'graphql-relay';
 
 let Schema = (db) => {
 
@@ -19,21 +19,27 @@ let linkType = new GraphQLObjectType({
         }},
         title: {type: GraphQLString},
         url: { type: GraphQLString},
+        createdAt : {type: GraphQLString, resolve: (obj) => {
+            return obj.createdAt? new Date(obj.createdAt).toISOString(): ""
+        }}
     }
     
 })
-let {connectionType: linkConnection} = connectionDefinitions({
+
+let {edgeType: linkEdge, connectionType: linkConnection} = connectionDefinitions({
     name: 'Link',
     nodeType : linkType
 })
+
 let storeType = new GraphQLObjectType({
-        name: 'Store', 
-        fields: {
+    name: 'Store', 
+    fields: {
+            id: globalIdField("Store"),
             linkConnection: {
                 type: linkConnection,
                 args: connectionArgs,
                 resolve: (__, args) => connectionFromPromisedArray(
-                    db.collection("links").find({}).toArray(),
+                    db.collection("links").find({}).sort({createdAt: -1}).toArray(),
                     args)
                 ,
             }
@@ -47,15 +53,19 @@ let createLinkMutation = mutationWithClientMutationId({
         title: {type: new GraphQLNonNull(GraphQLString)},
         url: {type: new GraphQLNonNull(GraphQLString)}
     },
-    outputFields:{ //** Read after the mutation */
-        link:{
-            type: linkType,
-            resolve: (mongodbResult) => mongodbResult.ops[0]
+    outputFields:{ //** Read after the mutation, can modify the type to output here */
+        linkEdge:{
+            type: linkEdge,
+            resolve: (mongodbResult) => ({ node: mongodbResult.ops[0], cursur: mongodbResult.insertedId})
+        },
+        store:{
+            type: storeType,
+            resolve: () => {}
         }
     },
     mutateAndGetPayload: ({title, url}) => {
         //mongodb operation
-        return db.collection("links").insertOne({title, url})
+        return db.collection("links").insertOne({title, url, createdAt: new Date()})
 
     }
 })

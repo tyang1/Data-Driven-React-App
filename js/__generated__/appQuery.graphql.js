@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 56f8067290bb70c1bed80e34eec5c4a9
+ * @relayHash 0d2448fc959c2648436d497b5fcddf45
  */
 
 /* eslint-disable */
@@ -27,27 +27,51 @@ export type appQuery = {|
 query appQuery {
   store {
     ...Main_store
+    id
   }
 }
 
 fragment Link_link on Link {
   url
   title
+  createdAt
 }
 
 fragment Main_store on Store {
-  linkConnection(first: 1) {
+  id
+  linkConnection(first: 10) {
     edges {
       node {
         id
         ...Link_link
+        __typename
       }
+      cursor
+    }
+    pageInfo {
+      endCursor
+      hasNextPage
     }
   }
 }
 */
 
-const node/*: ConcreteRequest*/ = {
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v1 = [
+  {
+    "kind": "Literal",
+    "name": "first",
+    "value": 10
+  }
+];
+return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
@@ -88,18 +112,13 @@ const node/*: ConcreteRequest*/ = {
         "concreteType": "Store",
         "plural": false,
         "selections": [
+          (v0/*: any*/),
           {
             "kind": "LinkedField",
             "alias": null,
             "name": "linkConnection",
-            "storageKey": "linkConnection(first:1)",
-            "args": [
-              {
-                "kind": "Literal",
-                "name": "first",
-                "value": 1
-              }
-            ],
+            "storageKey": "linkConnection(first:10)",
+            "args": (v1/*: any*/),
             "concreteType": "LinkConnection",
             "plural": false,
             "selections": [
@@ -121,13 +140,7 @@ const node/*: ConcreteRequest*/ = {
                     "concreteType": "Link",
                     "plural": false,
                     "selections": [
-                      {
-                        "kind": "ScalarField",
-                        "alias": null,
-                        "name": "id",
-                        "args": null,
-                        "storageKey": null
-                      },
+                      (v0/*: any*/),
                       {
                         "kind": "ScalarField",
                         "alias": null,
@@ -141,12 +154,67 @@ const node/*: ConcreteRequest*/ = {
                         "name": "title",
                         "args": null,
                         "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "createdAt",
+                        "args": null,
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "name": "__typename",
+                        "args": null,
+                        "storageKey": null
                       }
                     ]
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "cursor",
+                    "args": null,
+                    "storageKey": null
+                  }
+                ]
+              },
+              {
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "pageInfo",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "PageInfo",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "endCursor",
+                    "args": null,
+                    "storageKey": null
+                  },
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "name": "hasNextPage",
+                    "args": null,
+                    "storageKey": null
                   }
                 ]
               }
             ]
+          },
+          {
+            "kind": "LinkedHandle",
+            "alias": null,
+            "name": "linkConnection",
+            "args": (v1/*: any*/),
+            "handle": "connection",
+            "key": "Main_linkConnection",
+            "filters": null
           }
         ]
       }
@@ -156,10 +224,11 @@ const node/*: ConcreteRequest*/ = {
     "operationKind": "query",
     "name": "appQuery",
     "id": null,
-    "text": "query appQuery {\n  store {\n    ...Main_store\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n}\n\nfragment Main_store on Store {\n  linkConnection(first: 1) {\n    edges {\n      node {\n        id\n        ...Link_link\n      }\n    }\n  }\n}\n",
+    "text": "query appQuery {\n  store {\n    ...Main_store\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store on Store {\n  id\n  linkConnection(first: 10) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
+})();
 // prettier-ignore
 (node/*: any*/).hash = 'b52e2f2018101e46cb6419c653545d0f';
 
