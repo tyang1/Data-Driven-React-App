@@ -6,7 +6,15 @@ class Link extends React.Component{
     constructor(props){
         super(props)
     }
-    dateLabel = () => moment(this.props.link.createdAt).format("L")
+    dateLabel = () => {
+        // let {link, relay} = this.props;
+        // console.log('relay', relay);
+        // if(relay.hasOptimisticUpdate(link)){
+        //     return 'Saving'
+        // };
+        if(this.props.link.createdAt == 'Saving') return "Saving";
+        return moment(this.props.link.createdAt).format("L")};
+
     render(){
       const {link} = this.props;
             return (<li key={link.id}>

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9762441a5c2a34d6bfad2d1dba097864
+ * @relayHash 4b2bf8ab0c27ba954b107a920120a654
  */
 
 /* eslint-disable */
@@ -24,6 +24,7 @@ export type CreateLinkMutationResponse = {|
         +id: string,
         +url: ?string,
         +title: ?string,
+        +createdAt: ?string,
       |}
     |}
   |}
@@ -45,6 +46,7 @@ mutation CreateLinkMutation(
         id
         url
         title
+        createdAt
       }
     }
   }
@@ -114,6 +116,13 @@ v1 = [
                 "name": "title",
                 "args": null,
                 "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "createdAt",
+                "args": null,
+                "storageKey": null
               }
             ]
           }
@@ -142,12 +151,12 @@ return {
     "operationKind": "mutation",
     "name": "CreateLinkMutation",
     "id": null,
-    "text": "mutation CreateLinkMutation(\n  $input: CreateLinkInput!\n) {\n  createLinks(input: $input) {\n    linkEdge {\n      node {\n        id\n        url\n        title\n      }\n    }\n  }\n}\n",
+    "text": "mutation CreateLinkMutation(\n  $input: CreateLinkInput!\n) {\n  createLinks(input: $input) {\n    linkEdge {\n      node {\n        id\n        url\n        title\n        createdAt\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'df1a6f38519b55839287d2cd965d4ca6';
+(node/*: any*/).hash = 'd3ae6bf8d73f011f159156d2c13df982';
 
 module.exports = node;
