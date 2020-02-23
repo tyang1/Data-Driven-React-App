@@ -68,7 +68,7 @@ return {
       "kind": "LocalArgument",
       "name": "query",
       "type": "String",
-      "defaultValue": ""
+      "defaultValue": null
     }
   ],
   "selections": [
@@ -161,6 +161,6 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'a0b00f1ed5fa87eb374559404d01f4cf';
+(node/*: any*/).hash = '122476678c26cf227b7c178a8ab90f16';
 
 module.exports = node;

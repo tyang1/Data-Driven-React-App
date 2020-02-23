@@ -6,7 +6,6 @@ const mutation = graphql`
         createLinks(input: $input){
             linkEdge{
                 node{
-                    id,
                     url,
                     title,
                     createdAt
@@ -59,33 +58,6 @@ function createLinkMutation(environment, storeID, input) {
                 }
             }
             },
-            // optimisticUpdater: (store) => {
-            //     // Create a Todo record in our store with a temporary ID
-            //     const{title, url, createdAt} = input
-            //     const id = 'client:createLinks:' + tempID++;
-            //     const node = store.create(id, 'link');
-            //     node.setValue(title, 'title');
-            //     node.setValue(url, 'url');
-            //     node.setvalue(createdAt, 'createdAt');
-          
-            //     // Create a new edge that contains the newly created Todo record
-            //     const newEdge = store.create(
-            //       'client:newEdge:' + tempID++,
-            //       'linkEdge',
-            //     );
-            //     newEdge.setLinkedRecord(node, 'node');
-          
-            //     // Add it to the user's todo list
-            //     sharedUpdater(store, input, newEdge);
-          
-            //     // Given that we don't have a server response here,
-            //     // we also need to update the todo item count on the user
-            //     const userRecord = store.get(input.id);
-            //     userRecord.setValue(
-            //       userRecord.getValue('totalCount') + 1,
-            //       'totalCount',
-            //     );
-            //   },
             configs: [{
                 type: 'RANGE_ADD',
                 parentID: storeID,

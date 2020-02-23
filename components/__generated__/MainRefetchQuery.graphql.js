@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 13b1e7aef6922ad43f5f3940b9edcc24
+ * @relayHash c05c6e83296178f431104534613202f3
  */
 
 /* eslint-disable */
@@ -12,7 +12,7 @@ import type { ConcreteRequest } from 'relay-runtime';
 type Main_store$ref = any;
 export type MainRefetchQueryVariables = {|
   limit?: ?number,
-  query?: ?string,
+  query: string,
 |};
 export type MainRefetchQueryResponse = {|
   +store: ?{|
@@ -29,7 +29,7 @@ export type MainRefetchQuery = {|
 /*
 query MainRefetchQuery(
   $limit: Int
-  $query: String
+  $query: String!
 ) {
   store {
     ...Main_store_3HzzW
@@ -73,7 +73,7 @@ var v0 = [
   {
     "kind": "LocalArgument",
     "name": "query",
-    "type": "String",
+    "type": "String!",
     "defaultValue": null
   }
 ],
@@ -259,12 +259,12 @@ return {
     "operationKind": "query",
     "name": "MainRefetchQuery",
     "id": null,
-    "text": "query MainRefetchQuery(\n  $limit: Int\n  $query: String\n) {\n  store {\n    ...Main_store_3HzzW\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store_3HzzW on Store {\n  id\n  linkConnection(first: $limit, query: $query) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query MainRefetchQuery(\n  $limit: Int\n  $query: String!\n) {\n  store {\n    ...Main_store_3HzzW\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store_3HzzW on Store {\n  id\n  linkConnection(first: $limit, query: $query) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'b6778d8edfe27d07297a2fd705200cbf';
+(node/*: any*/).hash = 'aebcaffe3636b7fb9ec166a32efbd823';
 
 module.exports = node;
