@@ -2,18 +2,23 @@ import React from 'react';
 import {createFragmentContainer, graphql, createRefetchContainer} from 'react-relay';
 import Link from './Link.jsx';
 import createLinkMutation from '../mutations/CreateLinkMutation';
+import { debounce } from 'lodash';
 
 export class Main extends React.Component{
     constructor(props){
         super(props);
+        this.search = debounce(this.searchHandler, 300)
     }
     setLimit = (e) => {
         let newLimit = Number(e.target.value);
         this.props.relay.refetch({limit: newLimit})
-    }
+    } 
     searchHandler = (e) => {
+        e.preventDefault();
+        console.log("searchHandler", e.target)
         let query = e.target.value;
-        this.props.relay.refetch({query})
+        this.props.relay.refetch({query});
+
     }
     handleNewLink = (e) => {
         e.preventDefault();
@@ -36,7 +41,7 @@ export class Main extends React.Component{
                     <input type="text" placeholder="Url" ref="newUrl"/> 
                     <button type="submit">Add</button>
                 </form>
-                <input type="text" placeholder='Search' onChange={this.searchHandler}/>
+                <input type="text" placeholder='Search' onChange={ (e) => { e.persist(); this.search(e)}}/>
 
                 <select onChange={this.setLimit}>
                     <option value='1'>1</option>
