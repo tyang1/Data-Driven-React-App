@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import {createFragmentContainer, graphql, createRefetchContainer} from 'react-relay';
 import Link from './Link.jsx';
 import createLinkMutation from '../mutations/CreateLinkMutation';
 import { debounce } from 'lodash';
 
+let eventTracker = [];
 export class Main extends React.Component{
     constructor(props){
         super(props);
-        this.search = debounce(this.searchHandler, 300)
+        this.search = debounce(this.searchHandler, 300);
     }
     setLimit = (e) => {
         let newLimit = Number(e.target.value);
@@ -15,7 +16,6 @@ export class Main extends React.Component{
     } 
     searchHandler = (e) => {
         e.preventDefault();
-        console.log("searchHandler", e.target)
         let query = e.target.value;
         this.props.relay.refetch({query});
 
@@ -54,29 +54,38 @@ export class Main extends React.Component{
         )
     }
 }
-//createFragmentContainer is a HOC => why using HOC?
-//decorating the class to be part of the relay class before rendering
 
-export default createRefetchContainer(Main, {
+function NewcreateRefetchContainer(Component, fragments, taggedNode, createRefetchContainer) {
+    console.log("Composes a React component class, returning a new class that intercepts props, resolving them with the provided fragments and subscribing for updates.", createRefetchContainer.prototype.constructor)
+    return createRefetchContainer.call(this, Component, fragments, taggedNode );
+};
+
+
+
+const fragment = {
     store: graphql`
     fragment Main_store on Store @argumentDefinitions(
         limit: {type: "Int", defaultValue: 10},
         query: {type: "String"}
         ){
-        id,
-        linkConnection(first: $limit, query: $query)@connection(key:"Main_linkConnection"){
-            edges{
-                node{
-                    id,
-                    ...Link_link
+            id,
+            linkConnection(first: $limit, query: $query)@connection(key:"Main_linkConnection"){
+                edges{
+                    node{
+                        id,
+                        ...Link_link
+                    }
                 }
             }
-        }
-      }`
-    },
+        }`
+    }
+
+const Test = NewcreateRefetchContainer(Main, fragment,
     graphql`query MainRefetchQuery($limit: Int, $query: String!){
         store {
             ...Main_store @arguments(limit: $limit, query: $query)
         }
-    }`
+    }`, createRefetchContainer
 )
+
+export default Test
