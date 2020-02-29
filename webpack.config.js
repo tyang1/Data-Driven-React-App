@@ -40,9 +40,31 @@ module.exports = {
                 },
             ]
         },
+        {
+            test: /\.s[ac]ss$/i,
+            use: [
+                 // Creates `style` nodes from JS strings
+                {
+                   loader: 'style-loader',
+                },
+                  // Translates CSS into CommonJS
+                {
+                   loader: 'css-loader',
+                   options: {
+                      sourceMap: true,
+                      modules: true,
+                    //   localIdentName: '[local]___[hash:base64:5]'
+                     }
+                },
+                 // Compiles Sass to CSS
+                {
+                    loader: 'sass-loader'
+                }
+                ],
+          },
         ]
     },
     resolve: {
-        extensions: [ '.tsx', '.ts', '.js', 'jsx' ],
+        extensions: [ '.tsx', '.ts', '.js', 'jsx', 'scss' ],
       },
 }

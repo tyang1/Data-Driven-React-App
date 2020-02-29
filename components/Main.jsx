@@ -3,8 +3,8 @@ import {createFragmentContainer, graphql, createRefetchContainer} from 'react-re
 import Link from './Link.jsx';
 import createLinkMutation from '../mutations/CreateLinkMutation';
 import { debounce } from 'lodash';
+import s from './Main.scss';
 
-let eventTracker = [];
 export class Main extends React.Component{
     constructor(props){
         super(props);
@@ -32,7 +32,7 @@ export class Main extends React.Component{
             return <Link link={edge.node}/>
         })
         return(
-            <div>
+            <div className={s.MainContainer}>
                 <h3>Links</h3>
                 <form
                     onSubmit = {this.handleNewLink}
@@ -56,7 +56,7 @@ export class Main extends React.Component{
 }
 
 function NewcreateRefetchContainer(Component, fragments, taggedNode, createRefetchContainer) {
-    console.log("Composes a React component class, returning a new class that intercepts props, resolving them with the provided fragments and subscribing for updates.", createRefetchContainer.prototype.constructor)
+    console.log("Composes a React component class, returning a new class that intercepts props, resolving them with the provided fragments and subscribing for updates." + "\n", createRefetchContainer.prototype.constructor)
     return createRefetchContainer.call(this, Component, fragments, taggedNode );
 };
 

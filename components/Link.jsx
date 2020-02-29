@@ -1,6 +1,7 @@
 import React from 'react';
 import {createFragmentContainer, graphql} from 'react-relay';
 import moment from 'moment';
+import s from './Link.scss'
 
 class Link extends React.Component{
     constructor(props){
@@ -18,7 +19,7 @@ class Link extends React.Component{
     render(){
       const {link} = this.props;
             return (<li key={link.id}>
-                <a>{this.dateLabel()}</a>
+                <a className={s.linkDate}>{this.dateLabel()}</a>
                 <a href={link.url}>{link.title}</a>
             </li>)
     }
