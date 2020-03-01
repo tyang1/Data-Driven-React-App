@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 57998ea68bdcf51fad49ce3759e89ace
+ * @relayHash 9ffd7d6220cfa95ae03c99551863c9cf
  */
 
 /* eslint-disable */
@@ -39,7 +39,7 @@ fragment Link_link on Link {
 
 fragment Main_store on Store {
   id
-  linkConnection(first: 10) {
+  linkConnection(first: 10, query: "") {
     edges {
       node {
         id
@@ -69,6 +69,11 @@ v1 = [
     "kind": "Literal",
     "name": "first",
     "value": 10
+  },
+  {
+    "kind": "Literal",
+    "name": "query",
+    "value": ""
   }
 ];
 return {
@@ -117,7 +122,7 @@ return {
             "kind": "LinkedField",
             "alias": null,
             "name": "linkConnection",
-            "storageKey": "linkConnection(first:10)",
+            "storageKey": "linkConnection(first:10,query:\"\")",
             "args": (v1/*: any*/),
             "concreteType": "LinkConnection",
             "plural": false,
@@ -215,7 +220,7 @@ return {
             "handle": "connection",
             "key": "Main_linkConnection",
             "filters": [
-              "query"
+              "limit"
             ]
           }
         ]
@@ -226,7 +231,7 @@ return {
     "operationKind": "query",
     "name": "appQuery",
     "id": null,
-    "text": "query appQuery {\n  store {\n    ...Main_store\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store on Store {\n  id\n  linkConnection(first: 10) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query appQuery {\n  store {\n    ...Main_store\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store on Store {\n  id\n  linkConnection(first: 10, query: \"\") {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

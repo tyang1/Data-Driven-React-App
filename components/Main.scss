@@ -1,11 +1,17 @@
 .MainContainer {
+   background-color: lightgoldenrodyellow;
+   
    input {
        margin-left: 30px;
        margin-bottom: 10px;
+       font-size: large;
    }
    select{
        margin-left: 30px;
    }
    
+}
+.MainHeader {
+    display: flex;
 }
 

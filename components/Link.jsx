@@ -8,11 +8,6 @@ class Link extends React.Component{
         super(props)
     }
     dateLabel = () => {
-        // let {link, relay} = this.props;
-        // console.log('relay', relay);
-        // if(relay.hasOptimisticUpdate(link)){
-        //     return 'Saving'
-        // };
         if(this.props.link.createdAt == 'Saving') return "Saving";
         return moment(this.props.link.createdAt).format("L")};
 

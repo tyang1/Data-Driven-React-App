@@ -66,10 +66,10 @@ const fragment = {
     store: graphql`
     fragment Main_store on Store @argumentDefinitions(
         limit: {type: "Int", defaultValue: 10},
-        query: {type: "String"}
+        query: {type: "String", defaultValue: ""}
         ){
             id,
-            linkConnection(first: $limit, query: $query)@connection(key:"Main_linkConnection"){
+            linkConnection(first: $limit, query: $query)@connection(key:"Main_linkConnection", filters: ["limit"]){
                 edges{
                     node{
                         id,
@@ -81,7 +81,7 @@ const fragment = {
     }
 
 const Test = NewcreateRefetchContainer(Main, fragment,
-    graphql`query MainRefetchQuery($limit: Int, $query: String!){
+    graphql`query MainRefetchQuery($limit: Int, $query: String){
         store {
             ...Main_store @arguments(limit: $limit, query: $query)
         }
