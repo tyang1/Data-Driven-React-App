@@ -45,9 +45,9 @@ export class Main extends React.Component{
 
                 <select onChange={this.setLimit}>
                     <option value='1'>1</option>
-                    <option value='100' selected>100</option>
+                    <option value='10' selected>10</option>
                 </select>
-                <ul>
+                <ul className={s.linkLayout}>
                     {content}
                 </ul>
             </div>

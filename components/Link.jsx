@@ -13,7 +13,7 @@ class Link extends React.Component{
 
     render(){
       const {link} = this.props;
-            return (<li key={link.id}>
+            return (<li className={s.linkInfo} key={link.id}>
                 <a className={s.linkDate}>{this.dateLabel()}</a>
                 <a href={link.url}>{link.title}</a>
             </li>)
