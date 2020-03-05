@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash f3067d1ffebca250e64d1efee64585c4
+ * @relayHash f06f884d6f0bb5306b7855178b4dd4b0
  */
 
 /* eslint-disable */
@@ -38,6 +38,7 @@ query MainRefetchQuery(
 }
 
 fragment Link_link on Link {
+  id
   url
   title
   createdAt
@@ -259,7 +260,7 @@ return {
     "operationKind": "query",
     "name": "MainRefetchQuery",
     "id": null,
-    "text": "query MainRefetchQuery(\n  $limit: Int\n  $query: String\n) {\n  store {\n    ...Main_store_3HzzW\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store_3HzzW on Store {\n  id\n  linkConnection(first: $limit, query: $query) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query MainRefetchQuery(\n  $limit: Int\n  $query: String\n) {\n  store {\n    ...Main_store_3HzzW\n    id\n  }\n}\n\nfragment Link_link on Link {\n  id\n  url\n  title\n  createdAt\n}\n\nfragment Main_store_3HzzW on Store {\n  id\n  linkConnection(first: $limit, query: $query) {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };

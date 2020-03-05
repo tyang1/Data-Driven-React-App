@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 4d9cca7616069bdba4771dcb58e575a0
+ * @relayHash 4b2bf8ab0c27ba954b107a920120a654
  */
 
 /* eslint-disable */
@@ -21,6 +21,7 @@ export type CreateLinkMutationResponse = {|
   +createLinks: ?{|
     +linkEdge: ?{|
       +node: ?{|
+        +id: string,
         +url: ?string,
         +title: ?string,
         +createdAt: ?string,
@@ -42,10 +43,10 @@ mutation CreateLinkMutation(
   createLinks(input: $input) {
     linkEdge {
       node {
+        id
         url
         title
         createdAt
-        id
       }
     }
   }
@@ -63,32 +64,73 @@ var v0 = [
 ],
 v1 = [
   {
-    "kind": "Variable",
-    "name": "input",
-    "variableName": "input"
+    "kind": "LinkedField",
+    "alias": null,
+    "name": "createLinks",
+    "storageKey": null,
+    "args": [
+      {
+        "kind": "Variable",
+        "name": "input",
+        "variableName": "input"
+      }
+    ],
+    "concreteType": "CreateLinkPayload",
+    "plural": false,
+    "selections": [
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "linkEdge",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "LinkEdge",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "LinkedField",
+            "alias": null,
+            "name": "node",
+            "storageKey": null,
+            "args": null,
+            "concreteType": "Link",
+            "plural": false,
+            "selections": [
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "id",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "url",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "title",
+                "args": null,
+                "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "createdAt",
+                "args": null,
+                "storageKey": null
+              }
+            ]
+          }
+        ]
+      }
+    ]
   }
-],
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "url",
-  "args": null,
-  "storageKey": null
-},
-v3 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "title",
-  "args": null,
-  "storageKey": null
-},
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "createdAt",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "fragment": {
@@ -97,105 +139,24 @@ return {
     "type": "mutation",
     "metadata": null,
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "createLinks",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "CreateLinkPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "linkEdge",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "LinkEdge",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "node",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "Link",
-                "plural": false,
-                "selections": [
-                  (v2/*: any*/),
-                  (v3/*: any*/),
-                  (v4/*: any*/)
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "CreateLinkMutation",
     "argumentDefinitions": (v0/*: any*/),
-    "selections": [
-      {
-        "kind": "LinkedField",
-        "alias": null,
-        "name": "createLinks",
-        "storageKey": null,
-        "args": (v1/*: any*/),
-        "concreteType": "CreateLinkPayload",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "linkEdge",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "LinkEdge",
-            "plural": false,
-            "selections": [
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "node",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "Link",
-                "plural": false,
-                "selections": [
-                  (v2/*: any*/),
-                  (v3/*: any*/),
-                  (v4/*: any*/),
-                  {
-                    "kind": "ScalarField",
-                    "alias": null,
-                    "name": "id",
-                    "args": null,
-                    "storageKey": null
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "mutation",
     "name": "CreateLinkMutation",
     "id": null,
-    "text": "mutation CreateLinkMutation(\n  $input: CreateLinkInput!\n) {\n  createLinks(input: $input) {\n    linkEdge {\n      node {\n        url\n        title\n        createdAt\n        id\n      }\n    }\n  }\n}\n",
+    "text": "mutation CreateLinkMutation(\n  $input: CreateLinkInput!\n) {\n  createLinks(input: $input) {\n    linkEdge {\n      node {\n        id\n        url\n        title\n        createdAt\n      }\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'e38e62d31ee6a023366d213dcd499593';
+(node/*: any*/).hash = 'd3ae6bf8d73f011f159156d2c13df982';
 
 module.exports = node;

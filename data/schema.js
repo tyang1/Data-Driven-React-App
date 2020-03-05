@@ -66,6 +66,7 @@ let createLinkMutation = mutationWithClientMutationId({
             type: linkEdge,
             resolve: (mongodbResult) => ({ node: mongodbResult.ops[0], cursur: mongodbResult.insertedId})
         },
+        //needs to specify the store here to make sure the store gets the mutation payload
         store:{
             type: storeType,
             resolve: () => {}

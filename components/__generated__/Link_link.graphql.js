@@ -12,6 +12,7 @@ import type { FragmentReference } from "relay-runtime";
 declare export opaque type Link_link$ref: FragmentReference;
 declare export opaque type Link_link$fragmentType: Link_link$ref;
 export type Link_link = {|
+  +id: string,
   +url: ?string,
   +title: ?string,
   +createdAt: ?string,
@@ -36,6 +37,13 @@ const node/*: ReaderFragment*/ = {
     {
       "kind": "ScalarField",
       "alias": null,
+      "name": "id",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
       "name": "url",
       "args": null,
       "storageKey": null
@@ -57,6 +65,6 @@ const node/*: ReaderFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = '864a8f8db4423a1f02ce1503b153c2d7';
+(node/*: any*/).hash = 'e7388a5caf1b66b8dee6e5c5e3203eeb';
 
 module.exports = node;

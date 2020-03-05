@@ -23,6 +23,7 @@
     "moment": "^2.24.0",
     "mongodb": "^3.5.3",
     "react-relay": "^9.0.0",
+    "react-router-dom": "^5.1.2",
     "relay-compiler": "^9.0.0",
     "relay-runtime": "^9.0.0"
   },

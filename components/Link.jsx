@@ -23,6 +23,7 @@ class Link extends React.Component{
 export default createFragmentContainer(Link, {
     link: graphql`
     fragment Link_link on Link{
+            id,
             url,
             title,
             createdAt

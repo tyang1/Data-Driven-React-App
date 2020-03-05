@@ -1,5 +1,5 @@
 import React, { createRef } from 'react';
-import {createFragmentContainer, graphql, createRefetchContainer} from 'react-relay';
+import {graphql, createRefetchContainer} from 'react-relay';
 import Link from './Link.jsx';
 import createLinkMutation from '../mutations/CreateLinkMutation';
 import { debounce } from 'lodash';
@@ -22,7 +22,8 @@ export class Main extends React.Component{
     }
     handleNewLink = (e) => {
         e.preventDefault();
-        createLinkMutation(this.props.relay.environment, this.props.store.id, {title: this.refs.newTitle.value, url: this.refs.newUrl.value, store:this.props.store})
+        //Here is where the node ID needs to be requested because your refetchQuery needs to know the nodeID
+        createLinkMutation(this.props.relay.environment, this.props.store, {title: this.refs.newTitle.value, url: this.refs.newUrl.value, store:this.props.store})
         this.refs.newTitle.value = "";
         this.refs.newUrl.value = "";
 
@@ -56,7 +57,7 @@ export class Main extends React.Component{
 }
 
 function NewcreateRefetchContainer(Component, fragments, taggedNode, createRefetchContainer) {
-    console.log("Composes a React component class, returning a new class that intercepts props, resolving them with the provided fragments and subscribing for updates." + "\n", createRefetchContainer.prototype.constructor)
+    console.log("On first rendering! Relay composes a React component class, returning a new class that intercepts props, resolving them with the provided fragments and subscribing for updates." + "\n", createRefetchContainer.prototype.constructor)
     return createRefetchContainer.call(this, Component, fragments, taggedNode );
 };
 
@@ -69,7 +70,7 @@ const fragment = {
         query: {type: "String", defaultValue: ""}
         ){
             id,
-            linkConnection(first: $limit, query: $query)@connection(key:"Main_linkConnection", filters: ["limit"]){
+            linkConnection(first: $limit, query: $query)@connection(key:"Main_linkConnection", filters:["limit"]){
                 edges{
                     node{
                         id,

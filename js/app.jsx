@@ -9,6 +9,14 @@ import {
   Store,
 } from 'relay-runtime';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+} from 'react-router-dom'
+import Login from '../components/Login.jsx';
+
+
 function fetchQuery(
   operation,
   variables,
@@ -41,8 +49,17 @@ const renderQuery = ({error, props}) => {
       return <div>Loading...</div>;
     }
       
-    return <Main store={props.store}/>
+    // return <Main store={props.store}/>
+    return <Login/>
   }
+
+// class App extends React.Component{
+//   render(){
+//     return(
+
+//     )
+//   }
+// }
 
 ReactDOM.render(<QueryRenderer
   environment={environment}

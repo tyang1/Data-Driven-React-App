@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 9ffd7d6220cfa95ae03c99551863c9cf
+ * @relayHash 630a2d4a303139c634a8f81f40469cb6
  */
 
 /* eslint-disable */
@@ -32,6 +32,7 @@ query appQuery {
 }
 
 fragment Link_link on Link {
+  id
   url
   title
   createdAt
@@ -231,7 +232,7 @@ return {
     "operationKind": "query",
     "name": "appQuery",
     "id": null,
-    "text": "query appQuery {\n  store {\n    ...Main_store\n    id\n  }\n}\n\nfragment Link_link on Link {\n  url\n  title\n  createdAt\n}\n\nfragment Main_store on Store {\n  id\n  linkConnection(first: 10, query: \"\") {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
+    "text": "query appQuery {\n  store {\n    ...Main_store\n    id\n  }\n}\n\nfragment Link_link on Link {\n  id\n  url\n  title\n  createdAt\n}\n\nfragment Main_store on Store {\n  id\n  linkConnection(first: 10, query: \"\") {\n    edges {\n      node {\n        id\n        ...Link_link\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
