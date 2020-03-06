@@ -4,6 +4,7 @@ import Link from './Link.jsx';
 import createLinkMutation from '../mutations/CreateLinkMutation';
 import { debounce } from 'lodash';
 import s from './Main.scss';
+import {withLogic} from './FormLogic.jsx';
 
 export class Main extends React.Component{
     constructor(props){
@@ -88,5 +89,7 @@ const Test = NewcreateRefetchContainer(Main, fragment,
         }
     }`, createRefetchContainer
 )
+
+
 
 export default Test

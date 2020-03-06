@@ -9,12 +9,7 @@ import {
   Store,
 } from 'relay-runtime';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-} from 'react-router-dom'
-import Login from '../components/Login.jsx';
+import {FormLogic} from '../components/FormLogic.jsx';
 
 
 function fetchQuery(
@@ -41,6 +36,7 @@ export const environment = new Environment({
 });
 
 
+
 const renderQuery = ({error, props}) => {
     if (error) {
       return <div>Error!</div>;
@@ -49,17 +45,11 @@ const renderQuery = ({error, props}) => {
       return <div>Loading...</div>;
     }
       
-    // return <Main store={props.store}/>
-    return <Login/>
+    return (
+      <FormLogic logic={"test"}>
+        <Main store={props.store}/>
+      </FormLogic>)
   }
-
-// class App extends React.Component{
-//   render(){
-//     return(
-
-//     )
-//   }
-// }
 
 ReactDOM.render(<QueryRenderer
   environment={environment}
