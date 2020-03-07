@@ -4,13 +4,14 @@ import Link from './Link.jsx';
 import createLinkMutation from '../mutations/CreateLinkMutation';
 import { debounce } from 'lodash';
 import s from './Main.scss';
-import {withLogic} from './FormLogic.jsx';
+import {FormLogicContext} from './FormLogic.jsx';
 
 export class Main extends React.Component{
     constructor(props){
         super(props);
         this.search = debounce(this.searchHandler, 300);
     }
+    static contextType = FormLogicContext
     setLimit = (e) => {
         let newLimit = Number(e.target.value);
         this.props.relay.refetch({limit: newLimit})
@@ -30,6 +31,7 @@ export class Main extends React.Component{
 
     }
     render(){
+        // console.log("testing context", this.context)
         const content = this.props.store.linkConnection && this.props.store.linkConnection.edges.map(edge => {
             return <Link link={edge.node}/>
         })

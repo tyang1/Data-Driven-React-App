@@ -2,6 +2,7 @@ import React from 'react';
 import  ReactDOM  from 'react-dom';
 import { graphql, QueryRenderer } from 'react-relay';
 import Main from '../components/Main.jsx';
+import WithLogicLogin from '../components/Login.jsx';
 import {
   Environment,
   Network,
@@ -44,10 +45,13 @@ const renderQuery = ({error, props}) => {
     if (!props) {
       return <div>Loading...</div>;
     }
-      
+    
+    //Comment: what does not matter to the view of the Main's form component would be
+    //passed to the interested component in the form of context (i.e. login functionality)
     return (
       <FormLogic logic={"test"}>
-        <Main store={props.store}/>
+        {/* <Main store={props.store}/> */}
+        <WithLogicLogin/>
       </FormLogic>)
   }
 
