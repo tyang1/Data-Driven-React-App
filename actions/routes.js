@@ -1,11 +1,10 @@
 export const routes = [
-    {
-      path: '/login',
-      component: 'Login'
-    },
-    {
-      path: '/home',
-      component: 'Main',
-    }
-  ]
-
+  {
+    path: "/login",
+    component: "Login"
+  },
+  {
+    path: "/home",
+    component: "Main"
+  }
+];
