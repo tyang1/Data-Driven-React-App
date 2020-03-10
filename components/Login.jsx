@@ -1,15 +1,16 @@
 import React from 'react';
 import {withLogic, login} from './FormLogic.jsx';
 import cx from 'classnames';
+import s from './Login.scss';
 export class Login extends React.Component {
 
     constructor(props) {
       super(props);
-      this.state = { name: '', password: '', error: null }
+      this.state = { name: '', password: '', error: null, isValidPwd: true }
     }
   
     render() {
-      const { name, password, error } = this.state;
+      const { name, password, error, isValidPwd } = this.state;
       const { emailValidation, passwordValidation} = this.props;
       return (
         <form className="Login"
@@ -25,10 +26,10 @@ export class Login extends React.Component {
                    this.setState({ name: value });
 
                  }}  />			
-          <input type="password" name="password" value={ password } className={}
+          <input type="password" name="password" value={ password } className={cx({[s.InputNotValid]: !isValidPwd})}
                  onChange={e => {
                    const value = e.target.value;
-                   this.setState({ password: value });
+                   this.setState({ password: value, isValidPwd: passwordValidation(value) }, () => {console.log("pwd change", this.state.isValidPwd)});
                  }}  />
           <input type="submit" value="Login" />
         </form>

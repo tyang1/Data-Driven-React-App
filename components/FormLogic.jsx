@@ -1,12 +1,19 @@
 import React from 'react';
+import {isFunction, isObject} from '../utils/typeCheck.js';
+
 
 const validationLogic = {
     email:(email)=> {
        return `email validation! ${email}`
     },
     password: (pwd) => {
-       return `password validation! ${pwd}`
-
+        let text = pwd.toString();
+        const isValid = /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/.test(text)
+        if(isValid) {
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 
@@ -39,6 +46,7 @@ export  class FormLogic extends React.Component{
     }
 }
 
+//TODO: to hook up to the actual backend services
 export async function login(name, password) {
     const { token } = await fetchCreate(
       'authentication',
@@ -54,7 +62,7 @@ export function withLogic(mapLogicToProps){
     //Map logic to props for children component,
     //here we need the validation function as props to the wrappedComponent;
     let mappedCompProps = {};
-    if (!isObject(mapLogicToProps) || !isFunction(mapLogicToProps)) {
+    if (!isObject(mapLogicToProps) && !isFunction(mapLogicToProps)) {
 		throw new Error('withLogic expects an argument and it must be a function');
 	}
 
