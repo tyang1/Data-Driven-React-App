@@ -38,14 +38,16 @@ const renderQuery = ({ error, props }) => {
 
   //Comment: what does not matter to the view of the Main's form component would be
   //passed to the interested component in the form of context (i.e. login functionality)
+  const storeProps = props.store;
   return (
     <FormLogic logic={"test"}>
       <BrowserRouter>
-        <Route path="/" component={WithLogicLogin} />
-        <Route path="/HomePage" component={Main} />
-        {/* <WithLogicLogin /> */}
+        <Route exact path="/" component={WithLogicLogin} />
+        <Route
+          path="/HomePage"
+          render={props => <Main {...props} store={storeProps} />}
+        />
       </BrowserRouter>
-      {/* <Main store={props.store}/> */}
     </FormLogic>
   );
 };
