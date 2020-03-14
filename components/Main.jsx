@@ -67,7 +67,7 @@ export class Main extends React.Component {
   }
 }
 
-function NewcreateRefetchContainer(
+function createRefetchContainerWithLogs(
   Component,
   fragments,
   taggedNode,
@@ -102,7 +102,7 @@ const fragment = {
   `
 };
 
-const Test = NewcreateRefetchContainer(
+const mainRefetchContainer = createRefetchContainerWithLogs(
   Main,
   fragment,
   graphql`
@@ -115,4 +115,4 @@ const Test = NewcreateRefetchContainer(
   createRefetchContainer
 );
 
-export default Test;
+export default mainRefetchContainer;
