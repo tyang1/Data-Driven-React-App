@@ -33,7 +33,6 @@ export class Main extends React.Component {
     this.refs.newUrl.value = "";
   };
   render() {
-    // console.log("testing context", this.context)
     const content =
       this.props.store.linkConnection &&
       this.props.store.linkConnection.edges.map(edge => {

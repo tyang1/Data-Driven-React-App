@@ -2,6 +2,7 @@ import React from "react";
 import { withLogic, login } from "./FormLogic.jsx";
 import cx from "classnames";
 import s from "./Login.scss";
+import { withRouter } from "react-router-dom";
 export class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,7 @@ export class Login extends React.Component {
         className="Login"
         onSubmit={e => {
           e.preventDefault();
+          this.props.history.push("/HomePage");
           // login: not defined yet !
           // login(name, password);
         }}
@@ -58,4 +60,4 @@ const loginValidtion = {
 //Separating the login validation from the component has a few benefits:
 //1. prevents coupling a component to anything unrelated to it!
 //2. allows improved testability on the component without need of stubbing imports of login logics;
-export default withLogic(loginValidtion)(Login);
+export default withLogic(loginValidtion)(withRouter(Login));

@@ -6,6 +6,7 @@ import WithLogicLogin from "../components/Login.jsx";
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 
 import { FormLogic } from "../components/FormLogic.jsx";
+import { BrowserRouter, Route } from "react-router-dom";
 
 function fetchQuery(operation, variables) {
   return fetch("/graphql", {
@@ -39,8 +40,12 @@ const renderQuery = ({ error, props }) => {
   //passed to the interested component in the form of context (i.e. login functionality)
   return (
     <FormLogic logic={"test"}>
+      <BrowserRouter>
+        <Route path="/" component={WithLogicLogin} />
+        <Route path="/HomePage" component={Main} />
+        {/* <WithLogicLogin /> */}
+      </BrowserRouter>
       {/* <Main store={props.store}/> */}
-      <WithLogicLogin />
     </FormLogic>
   );
 };
