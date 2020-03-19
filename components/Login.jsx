@@ -60,4 +60,5 @@ const loginValidtion = {
 //Separating the login validation from the component has a few benefits:
 //1. prevents coupling a component to anything unrelated to it!
 //2. allows improved testability on the component without need of stubbing imports of login logics;
+//3. Be able to add the logic at runtime and get the logic in an easy way
 export default withLogic(loginValidtion)(withRouter(Login));

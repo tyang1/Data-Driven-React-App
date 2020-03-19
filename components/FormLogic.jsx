@@ -52,11 +52,10 @@ export class FormLogic extends React.Component {
 //TODO: to hook up to the actual backend services
 export async function login(name, password) {
   // const { token } = await fetchCreate("authentication", { name, password });
-
   // rememberToken(token);
-  history.go();
 }
 
+//
 export function withLogic(mapLogicToProps) {
   //Map logic to props for children component, here we need the validation function as props to the wrappedComponent;
   let mappedCompProps = {};
