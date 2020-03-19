@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { graphql, QueryRenderer } from "react-relay";
-import Main from "../components/Main.jsx";
+import Main from "../components/Main.tsx";
 import WithLogicLogin from "../components/Login.jsx";
 import { Environment, Network, RecordSource, Store } from "relay-runtime";
 import { FormLogic } from "../components/FormLogic.jsx";
