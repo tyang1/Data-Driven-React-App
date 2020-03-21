@@ -5,11 +5,9 @@ declare namespace IMain {
     relay: IRelayType;
     store: any;
   };
-
- 
   export type IRelayType = {
-    refetch: any;
-    environment: any;
+    refetch?: any;
+    environment?: any;
   };
 
   export type IState = {

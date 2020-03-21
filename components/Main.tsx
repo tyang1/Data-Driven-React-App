@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React from "react";
 import { graphql, createRefetchContainer } from "react-relay";
 import Link from "./Link.jsx";
 import createLinkMutation from "../mutations/CreateLinkMutation";
@@ -6,42 +6,50 @@ import { debounce } from "lodash";
 import s from "./Main.scss";
 import { FormLogicContext } from "./FormLogic.jsx";
 
-export interface IConstructorMethods {
-  search: () => void;
+export interface ConstructorMethods<T> {
+  (arg: T): void;
 }
 
-export class Main extends React.Component<
-  IMain.IProps,
-  IMain.IState,
-  IConstructorMethods
-> {
-  search: IConstructorMethods;
+export class Main extends React.Component<IMain.IProps, IMain.IState> {
+  search: ConstructorMethods<object>;
+  setTextInputRef: (element: any) => void;
+  setURLInputRef: (element: any) => void;
+  textInput: { value: string };
+  urlInput: { value: string };
 
   constructor(props) {
     super(props);
     this.search = debounce(this.searchHandler, 300);
+    this.setTextInputRef = element => {
+      this.textInput = element;
+    };
+    this.setURLInputRef = element => {
+      this.urlInput = element;
+    };
+    this.textInput = { value: "" };
+    this.urlInput = { value: "" };
   }
 
   static contextType = FormLogicContext;
-  setLimit = e => {
-    let newLimit = Number(e.target.value);
+  setLimit = (e): void => {
+    const newLimit = Number(e.target.value);
     this.props.relay.refetch({ limit: newLimit });
   };
-  searchHandler = e => {
+  searchHandler = (e): void => {
     e.preventDefault();
-    let query = e.target.value;
+    const query = e.target.value;
     this.props.relay.refetch({ query });
   };
-  handleNewLink = e => {
+  handleNewLink = (e): void => {
     e.preventDefault();
     //Here is where the node ID needs to be requested because your refetchQuery needs to know the nodeID
     createLinkMutation(this.props.relay.environment, this.props.store, {
-      title: this.refs.newTitle.value,
-      url: this.refs.newUrl.value,
+      title: this.textInput.value,
+      url: this.urlInput.value,
       store: this.props.store
     });
-    this.refs.newTitle.value = "";
-    this.refs.newUrl.value = "";
+    this.textInput.value = "";
+    this.urlInput.value = "";
   };
   render() {
     const content =
@@ -53,14 +61,14 @@ export class Main extends React.Component<
       <div className={s.MainContainer}>
         <h3>Links</h3>
         <form onSubmit={this.handleNewLink}>
-          <input type="text" placeholder="Title" ref="newTitle" />
-          <input type="text" placeholder="Url" ref="newUrl" />
+          <input type="text" placeholder="Title" ref={this.setTextInputRef} />
+          <input type="text" placeholder="Url" ref={this.setURLInputRef} />
           <button type="submit">Add</button>
         </form>
         <input
           type="text"
           placeholder="Search"
-          onChange={e => {
+          onChange={(e): void => {
             e.persist();
             this.search(e);
           }}
@@ -80,7 +88,6 @@ export class Main extends React.Component<
 
 function createRefetchContainerWithLogs(
   Component,
-  fragments,
   taggedNode,
   createRefetchContainer
 ) {
@@ -89,33 +96,34 @@ function createRefetchContainerWithLogs(
       "\n",
     createRefetchContainer.prototype.constructor
   );
-  return createRefetchContainer.call(this, Component, fragments, taggedNode);
-}
-
-const fragment = {
-  store: graphql`
-    fragment Main_store on Store
-      @argumentDefinitions(
-        limit: { type: "Int", defaultValue: 10 }
-        query: { type: "String", defaultValue: "" }
-      ) {
-      id
-      linkConnection(first: $limit, query: $query)
-        @connection(key: "Main_linkConnection", filters: ["limit"]) {
-        edges {
-          node {
-            id
-            ...Link_link
+  return createRefetchContainer(
+    Component,
+    {
+      store: graphql`
+        fragment Main_store on Store
+          @argumentDefinitions(
+            limit: { type: "Int", defaultValue: 10 }
+            query: { type: "String", defaultValue: "" }
+          ) {
+          id
+          linkConnection(first: $limit, query: $query)
+            @connection(key: "Main_linkConnection", filters: ["limit"]) {
+            edges {
+              node {
+                id
+                ...Link_link
+              }
+            }
           }
         }
-      }
-    }
-  `
-};
+      `
+    },
+    taggedNode
+  );
+}
 
 const mainRefetchContainer = createRefetchContainerWithLogs(
   Main,
-  fragment,
   graphql`
     query MainRefetchQuery($limit: Int, $query: String) {
       store {
