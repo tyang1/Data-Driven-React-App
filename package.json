@@ -1,10 +1,19 @@
 {
   "name": "rgrjs",
+  "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sss|styl)$": "<rootDir>/node_modules/jest-css-modules"
+    },
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    }
+  },
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "npx babel-node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "relay": "relay-compiler --src ./ --schema ./data/schema.json --extensions js jsx tsx"
   },
   "author": "",
@@ -18,12 +27,14 @@
     "babel-plugin-relay": "^9.0.0",
     "classnames": "^2.2.6",
     "css-modules-typescript-loader": "^4.0.0",
+    "enzyme": "^3.11.0",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
     "graphql": "^14.6.0",
     "graphql-relay": "^0.6.0",
+    "jest": "^25.1.0",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
@@ -40,17 +51,22 @@
     "@babel/node": "^7.8.4",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-transform-typescript": "^7.9.0",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
+    "@babel/preset-react": "^7.9.1",
     "@babel/preset-typescript": "^7.8.3",
     "@types/react": "^16.9.19",
     "@types/react-dom": "^16.9.5",
+    "babel-jest": "^25.2.3",
     "css-loader": "^3.4.2",
     "flux": "^3.1.3",
+    "jest-css-modules": "^2.1.0",
     "node-sass": "^4.13.1",
     "nodemon": "^2.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-test-renderer": "^16.13.1",
+    "relay-test-utils": "^9.0.0",
     "sass-loader": "^8.0.2",
     "source-map-loader": "^0.2.4",
     "style-loader": "^1.1.3",
