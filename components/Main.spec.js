@@ -2,12 +2,7 @@ import React from "react";
 import { FormLogicContext } from "./FormLogic.jsx";
 import { graphql, QueryRenderer } from "react-relay";
 import ReactTestRenderer from "react-test-renderer";
-// import { configure } from "enzyme";
-// import Adapter from "enzyme-adapter-react-16";
-// import { mount, shallow } from "enzyme";
 import { createMockEnvironment, MockPayloadGenerator } from "relay-test-utils";
-
-// configure({ adapter: new Adapter() });
 
 const getLogicWithFormLogicContext = (
   context = { logicStore: [], set: () => null, get: () => null }
