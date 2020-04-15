@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Main/> should render component 1`] = `
+<div
+  className="MainContainer"
+>
+  <h3>
+    Links
+  </h3>
+  <form
+    onSubmit={[Function]}
+  >
+    <input
+      placeholder="Title"
+      type="text"
+    />
+    <input
+      placeholder="Url"
+      type="text"
+    />
+    <button
+      type="submit"
+    >
+      Add
+    </button>
+  </form>
+  <input
+    onChange={[Function]}
+    placeholder="Search"
+    type="text"
+  />
+  <select
+    onChange={[Function]}
+  >
+    <option
+      value="1"
+    >
+      1
+    </option>
+    <option
+      selected={true}
+      value="10"
+    >
+      10
+    </option>
+  </select>
+  <ul
+    className="linkLayout"
+  />
+</div>
+`;

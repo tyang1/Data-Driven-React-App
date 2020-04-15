@@ -1,29 +1,26 @@
 .MainContainer {
-   background-color: lightgoldenrodyellow;
-   
-   input {
-       margin-left: 30px;
-       margin-bottom: 10px;
-       font-size: large;
-   }
-   select{
-       margin-left: 30px;
-   }
-   .linkLayout{
+  background-color: lightgoldenrodyellow;
+
+  input {
+    margin-left: 30px;
+    margin-bottom: 10px;
+    font-size: large;
+  }
+  select {
+    margin-left: 30px;
+  }
+  .linkLayout {
     @media (max-width: 425px) {
-       display: flex;
-       flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
-       display: flex;
-       flex-direction: row;
-       flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-   }
-   
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 .MainHeader {
-    display: flex;
+  display: flex;
 }
-
-
