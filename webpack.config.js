@@ -3,10 +3,10 @@ const getBabelRelayPlugin = require("babel-plugin-relay");
 const parsedSchemaJSON = require("./data/schema.json").data;
 
 module.exports = {
-  entry: "./js/app.jsx",
+  entry: "./src/app.jsx",
   output: {
     path: path.resolve(__dirname, "./public"),
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   /* 
      This configuration enables webpack to load a particular file when requested by the app with the help of loaders*/
@@ -21,14 +21,14 @@ module.exports = {
             presets: [
               "@babel/preset-env",
               "@babel/preset-react",
-              "@babel/preset-typescript"
+              "@babel/preset-typescript",
             ],
             plugins: [
               getBabelRelayPlugin(parsedSchemaJSON.__schema),
-              "@babel/plugin-proposal-class-properties"
-            ]
-          }
-        }
+              "@babel/plugin-proposal-class-properties",
+            ],
+          },
+        },
       },
       {
         test: /\.s[ac]ss$/i,
@@ -36,22 +36,22 @@ module.exports = {
           "css-modules-typescript-loader",
           // Creates `style` nodes from JS strings
           {
-            loader: "style-loader"
+            loader: "style-loader",
           },
           // Translates CSS into CommonJS
           {
             loader: "css-loader",
             options: {
               sourceMap: true,
-              modules: true
+              modules: true,
               //   localIdentName: '[local]___[hash:base64:5]'
-            }
+            },
           },
           // Compiles Sass to CSS
           {
-            loader: "sass-loader"
-          }
-        ]
+            loader: "sass-loader",
+          },
+        ],
       },
       {
         test: /\.(ts|tsx)$/,
@@ -63,25 +63,25 @@ module.exports = {
               presets: [
                 "@babel/preset-env",
                 "@babel/preset-react",
-                "@babel/preset-typescript"
+                "@babel/preset-typescript",
               ],
               plugins: [
                 getBabelRelayPlugin(parsedSchemaJSON.__schema),
-                "@babel/plugin-proposal-class-properties"
-              ]
-            }
+                "@babel/plugin-proposal-class-properties",
+              ],
+            },
           },
           {
             loader: "ts-loader",
             options: {
-              transpileOnly: true
-            }
-          }
-        ]
-      }
-    ]
+              transpileOnly: true,
+            },
+          },
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: [".tsx", ".ts", ".js", "jsx", "css", "scss"]
-  }
+    extensions: [".tsx", ".ts", ".js", "jsx", "css", "scss"],
+  },
 };

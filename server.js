@@ -7,7 +7,7 @@ import { introspectionQuery } from "graphql/utilities";
 
 const MongoClient = require("mongodb").MongoClient;
 const uri =
-  "mongodb+srv://rgruser:rgruser123@rgrjs-drp6v.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://<user>:<password>@rgrjs-drp6v.mongodb.net/test?retryWrites=true&w=majority";
 let app = express();
 
 app.use(express.static("public"));
@@ -22,9 +22,10 @@ app.use(express.static("public"));
       "/graphql",
       GraphQLHTTP({
         schema,
-        graphiql: true
+        graphiql: true,
       })
     );
+
     app.listen(3000, () => {
       console.log("connection on port 3000");
     });
@@ -43,7 +44,7 @@ app.use(express.static("public"));
     fs.writeFile(
       "./data/schema.json",
       JSON.stringify(schemaJSON, null, 2),
-      err => {
+      (err) => {
         if (err) throw err;
         console.log("schema JSON output completed!");
       }
