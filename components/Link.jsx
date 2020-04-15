@@ -31,5 +31,5 @@ export default createFragmentContainer(Link, {
       title
       createdAt
     }
-  `
+  `,
 });
