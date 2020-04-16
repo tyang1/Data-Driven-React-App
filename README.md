@@ -17,7 +17,7 @@ Test: "jest": "^25.1.0",
 
 {"_id":{"$oid":"5d9eb2a51c9d440000bf0dff"},"title":"React JS Main Websitee","url":"https://reactjs.org/"}
 
-When finished, execute the following steps to provide credential to connect to the database:
+* When finished, execute the following steps to provide credential to connect to the database:
 
 Inside file server.js, replace the <user> and <password> with the credentials you just created:  
 `const uri =
