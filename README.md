@@ -1,11 +1,39 @@
 RGR.js
 # Data-Driven-React-App
-Built with React, GraphQL, and Relay
+Built with React("^16.12.0"), GraphQL("^14.6.0"), and React-Relay("^9.0.0")
 
 What you will need also:
 Static typing: "typescript": "^3.8.3",
 Database: "mongodb": "^3.5.3",
+Backend:  "express": "^4.17.1",
+          "express-graphql": "^0.9.0",
 Test: "jest": "^25.1.0",
+
+# Steps to launch the app:
+
+**Before installing dependencies and kicking off the app, you will need mongodb user/password to connect to the database- sign up/in here to run on mongodb clusters: https://account.mongodb.com/account/login
+
+* Build documents to your collection as the following :
+
+{"_id":{"$oid":"5d9eb2a51c9d440000bf0dff"},"title":"React JS Main Websitee","url":"https://reactjs.org/"}
+
+When finished, execute the following steps to provide credential to connect to the database:
+
+Inside file server.js, replace the <user> and <password> with the credentials you just created:  
+`const uri =
+  "mongodb+srv://<user>:<password>@rgrjs-drp6v.mongodb.net/test?retryWrites=true&w=majority";`
+
+**Okay we are ready to kick off the app!
+
+npm install
+
+Start server:
+nodemon --ignore data/schema.json
+
+Start client:
+npm run start-client
+
+
 
 This is a simple link sharing app that intends to help developers learn/understand more about implementing Relay with console logs and comments. In addition, applying the redux-like logic to your React app for form validation. Why redux-like? well, in my opinion, it improves testability by decoupling the logic as dependency from the view. Dependencies could themselves be asynchronous, which means by the time component is mounted and interactable, dependencies need to be fully instantiated/available. If we can establish a "Flow of Logic" (like redux's connect, to inject/provide data to the view), it can lead to better separation of concerns and thus easier to reason the behavior of the application!
 ```
