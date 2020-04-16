@@ -1,6 +1,8 @@
 RGR.js
-# Data-Driven-React-App
-Built with React("^16.12.0"), GraphQL("^14.6.0"), and React-Relay("^9.0.0")
+# Data-Driven-React-App 
+powered with React("^16.12.0"), GraphQL("^14.6.0"), and React-Relay("^9.0.0")
+
+This is a simple link sharing app that intends to help developers learn/understand more about implementing Relay with console logs and comments. In addition, applying the redux-like logic to your React app for form validation.
 
 What you will need also:
 Static typing: "typescript": "^3.8.3",
@@ -35,7 +37,7 @@ npm run start-client
 
 
 
-This is a simple link sharing app that intends to help developers learn/understand more about implementing Relay with console logs and comments. In addition, applying the redux-like logic to your React app for form validation. Why redux-like? well, in my opinion, it improves testability by decoupling the logic as dependency from the view. Dependencies could themselves be asynchronous, which means by the time component is mounted and interactable, dependencies need to be fully instantiated/available. If we can establish a "Flow of Logic" (like redux's connect, to inject/provide data to the view), it can lead to better separation of concerns and thus easier to reason the behavior of the application!
+Why redux-like? well, in my opinion, it improves testability by decoupling the logic as dependency from the view. Dependencies could themselves be asynchronous, which means by the time component is mounted and interactable, dependencies need to be fully instantiated/available. If we can establish a "Flow of Logic" (like redux's connect, to inject/provide data to the view), it can lead to better separation of concerns and thus easier to reason the behavior of the application!
 ```
 import React from "react";
 import { withLogic, login } from "./FormLogic.jsx";
